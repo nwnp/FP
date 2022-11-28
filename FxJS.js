@@ -1,6 +1,9 @@
 const filter = (f, iter) => {
   let result = [];
-  for (const i of iter) {
+  iter = iter[Symbol.iterator]();
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     if (f(i)) result.push(i);
   }
   return result;
@@ -8,7 +11,10 @@ const filter = (f, iter) => {
 
 const map = (f, iter) => {
   let result = [];
-  for (const i of iter) {
+  iter = iter[Symbol.iterator]();
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     result.push(f(i));
   }
   return result;
@@ -18,8 +24,12 @@ const reduce = (f, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
+  } else {
+    iter = iter[Symbol.iterator]();
   }
-  for (const i of iter) {
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     acc = f(i, acc);
   }
   return acc;
@@ -33,7 +43,10 @@ const curry =
 
 const curryingFilter = curry((f, iter) => {
   let result = [];
-  for (const i of iter) {
+  iter = iter[Symbol.iterator]();
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     if (f(i)) result.push(i);
   }
   return result;
@@ -41,7 +54,10 @@ const curryingFilter = curry((f, iter) => {
 
 const curryingMap = curry((f, iter) => {
   let result = [];
-  for (const i of iter) {
+  iter = iter[Symbol.iterator]();
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     result.push(f(i));
   }
   return result;
@@ -51,8 +67,12 @@ const curryingReduce = curry((f, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
+  } else {
+    iter = iter[Symbol.iterator]();
   }
-  for (const i of iter) {
+  let cur;
+  while (!(cur = iter.next()).done) {
+    const a = cur.value;
     acc = f(i, acc);
   }
   return acc;
