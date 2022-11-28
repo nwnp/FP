@@ -1,9 +1,9 @@
 const {
   go,
   curry,
-  curringFilter,
-  curringMap,
-  curringReduce,
+  curryingFilter,
+  curryingMap,
+  curryingReduce,
 } = require("../FxJS.js");
 const { add } = require("../functions.js");
 
@@ -22,8 +22,8 @@ console.log(result1, result2);
 
 go(
   products,
-  curringFilter((p) => p.price >= 20000),
-  curringMap((p) => p.price),
-  curringReduce(add),
+  curryingFilter((p) => p.price >= 20000),
+  curryingMap((p) => p.price),
+  curryingReduce(add),
   console.log
 );

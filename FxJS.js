@@ -28,11 +28,10 @@ const reduce = (f, acc, iter) => {
 const curry =
   (f) =>
   (a, ...b) => {
-    if (b.length) return f(a, ...b);
-    else return (...b) => f(a, ...b);
+    return b.length ? f(a, ...b) : (...b) => f(a, ...b);
   };
 
-const curringFilter = curry((f, iter) => {
+const curryingFilter = curry((f, iter) => {
   let result = [];
   for (const i of iter) {
     if (f(i)) result.push(i);
@@ -40,7 +39,7 @@ const curringFilter = curry((f, iter) => {
   return result;
 });
 
-const curringMap = curry((f, iter) => {
+const curryingMap = curry((f, iter) => {
   let result = [];
   for (const i of iter) {
     result.push(f(i));
@@ -48,7 +47,7 @@ const curringMap = curry((f, iter) => {
   return result;
 });
 
-const curringReduce = curry((f, acc, iter) => {
+const curryingReduce = curry((f, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
@@ -67,7 +66,7 @@ module.exports = {
   reduce,
   go,
   curry,
-  curringFilter,
-  curringMap,
-  curringReduce,
+  curryingFilter,
+  curryingMap,
+  curryingReduce,
 };
