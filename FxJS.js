@@ -30,7 +30,7 @@ const reduce = (f, acc, iter) => {
   let cur;
   while (!(cur = iter.next()).done) {
     const a = cur.value;
-    acc = f(i, acc);
+    acc = f(i, a);
   }
   return acc;
 };
@@ -80,6 +80,15 @@ const curryingReduce = curry((f, acc, iter) => {
 
 const go = (...args) => reduce((f, a) => f(a), args);
 
+const take = (l, iter) => {
+  let res = [];
+  for (const a of iter) {
+    res.push(a);
+    if (res.length == l) return res;
+  }
+  return res;
+};
+
 module.exports = {
   filter,
   map,
@@ -89,4 +98,5 @@ module.exports = {
   curryingFilter,
   curryingMap,
   curryingReduce,
+  take,
 };
